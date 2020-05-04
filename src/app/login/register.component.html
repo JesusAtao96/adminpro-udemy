@@ -4,17 +4,20 @@
 <section
   id="wrapper"
   class="login-register login-sidebar"
-  style="background-image:url(../assets/images/background/login-register.jpg);"
+  style="background-image: url(../assets/images/background/login-register.jpg);"
 >
   <div class="login-box card">
     <div class="card-body">
       <form
+        ngNativeValidate
+        [formGroup]="forma"
+        (ngSubmit)="registrarUsuario()"
         class="form-horizontal form-material"
         id="loginform"
         action="index.html"
       >
         <a href="javascript:void(0)" class="text-center db"
-          ><img src="../assets/images/logo-icon.png" alt="Home"/><br /><img
+          ><img src="../assets/images/logo-icon.png" alt="Home" /><br /><img
             src="../assets/images/logo-text.png"
             alt="Home"
         /></a>
@@ -25,28 +28,22 @@
             <input
               class="form-control"
               type="text"
-              required=""
+              required
               placeholder="Nombre"
+              formControlName="nombre"
+              name="nombre"
             />
           </div>
         </div>
-        <div class="form-group ">
+        <div class="form-group">
           <div class="col-xs-12">
             <input
               class="form-control"
-              type="text"
-              required=""
+              type="email"
+              required
               placeholder="Correo"
-            />
-          </div>
-        </div>
-        <div class="form-group ">
-          <div class="col-xs-12">
-            <input
-              class="form-control"
-              type="password"
-              required=""
-              placeholder="Contraseña"
+              formControlName="correo"
+              name="correo"
             />
           </div>
         </div>
@@ -55,15 +52,39 @@
             <input
               class="form-control"
               type="password"
-              required=""
-              placeholder="Confirma contraseña"
+              required
+              placeholder="Contraseña"
+              formControlName="password"
+              name="password"
             />
           </div>
         </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <input
+              class="form-control"
+              type="password"
+              required
+              placeholder="Confirma contraseña"
+              formControlName="password2"
+              name="password2"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="forma.errors?.sonIguales && !forma.pristine">
+          <p class="text-danger">Las contraseñas deben ser iguales</p>
+        </div>
+
         <div class="form-group row">
           <div class="col-md-12">
             <div class="checkbox checkbox-primary p-t-0">
-              <input id="checkbox-signup" type="checkbox" />
+              <input
+                id="checkbox-signup"
+                type="checkbox"
+                formControlName="condiciones"
+                name="condiciones"
+              />
               <label for="checkbox-signup">
                 Estoy de acuerdo con los <a href="#">términos</a></label
               >
