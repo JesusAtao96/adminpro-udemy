@@ -6,6 +6,7 @@ import { PAGES_ROUTES } from './pages.routes';
 
 // Modulos
 import { SharedModule } from '../shared/shared.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 // ng2-charts
 import { ChartsModule } from 'ng2-charts';
@@ -34,7 +35,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     PromesasComponent,
     RxjsComponent
   ],
-  imports: [ FormsModule, ChartsModule, SharedModule, PAGES_ROUTES ],
+  imports: [ FormsModule, ChartsModule, PipesModule, SharedModule, PAGES_ROUTES ],
   exports: [
     DashboardComponent,
     ProgressComponent,
