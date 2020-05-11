@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
+import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 import { Usuario } from '../../models/usuario.model';
 
 import { map } from 'rxjs/operators';
@@ -15,7 +16,7 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
 
-  constructor(public http: HttpClient, public router: Router) {
+  constructor(public http: HttpClient, public router: Router, public subirArchivoService: SubirArchivoService) {
     this.cargarStorage();
   }
 
@@ -87,5 +88,29 @@ export class UsuarioService {
           return resp.usuario;
         })
       );
+  }
+
+  actualizarUsuario(usuario: Usuario) {
+    return this.http.put(`${environment.URL_SERVICIOS}/usuario/${usuario._id}?token=${this.token}`, usuario)
+      .pipe(
+        map((resp: any) => {
+          const usuarioDb: Usuario = resp.usuario;
+          this.guardarStorage(usuarioDb._id, this.token, usuarioDb);
+          Swal.fire({ title: 'Usuario actualizado', text: usuario.nombre, icon: 'success' });
+          return true;
+        })
+      );
+  }
+
+  cambiarImagen(archivo: File, id: string) {
+    this.subirArchivoService.subirArchivo(archivo, 'usuarios', id)
+      .then((resp: any) => {
+        this.usuario.img = resp.usuario.img;
+        this.guardarStorage(this.usuario._id, this.token, this.usuario);
+        Swal.fire({ title: 'Imagen actualizada', text: this.usuario.nombre, icon: 'success' });
+      })
+      .catch(resp => {
+        console.error(resp);
+      });
   }
 }
