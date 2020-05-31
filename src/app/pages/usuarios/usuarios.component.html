@@ -2,32 +2,37 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-
-        <input #input type="text" class="form-control" placeholder="Buscar usuario...">
-
+        <input
+          #input
+          type="text"
+          class="form-control"
+          placeholder="Buscar usuario..."
+          (keyup)="buscarUsuario(input.value)"
+        />
       </div>
     </div>
   </div>
 </div>
 
-<div class="row animated fadeIn">
+<div class="row animated fadeIn" *ngIf="cargando">
   <div class="col-12">
     <div class="alert alert-warning text-center">
       <strong>Cargando</strong>
-      <br>
+      <br />
       <i class="fa fa-refresh fa-spin fa-2x"></i>
-      <br>
+      <br />
       <span>Espere por favor</span>
     </div>
   </div>
 </div>
 
-<div class="row animated fadeIn">
+<div class="row animated fadeIn" *ngIf="!cargando">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-
-        <h3 class="card-title">Usuario registrados ( <small>123</small> )</h3>
+        <h3 class="card-title">
+          Usuario registrados ( <small>{{ totalRegistros }}</small> )
+        </h3>
 
         <table class="table table-hover">
           <thead>
@@ -41,17 +46,31 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            <tr *ngFor="let usuario of usuarios">
+              <td class="w70 text-center">
+                <img [src]="usuario.img | imagen" class="img-50 img-circle pointer" (click)="mostrarModal(usuario._id)">
+              </td>
+              <td>{{ usuario.email }}</td>
+              <td>{{ usuario.nombre }}</td>
               <td>
-                <button class="btn btn-primary mr-2">
+                <select name="role" class="form-control" [(ngModel)]="usuario.role">
+                  <option value="ADMIN_ROLE">ADMIN_ROLE</option>
+                  <option value="USER_ROLE">USER_ROLE</option>
+                </select>
+              </td>
+              <td>
+                <label *ngIf="usuario.google" class="label label-danger"
+                  >Google</label
+                >
+                <label *ngIf="!usuario.google" class="label label-primary"
+                  >Normal</label
+                >
+              </td>
+              <td>
+                <button class="btn btn-primary mr-2" (click)="guardarUsuario(usuario)">
                   <i class="fa fa-save"></i>
                 </button>
-                <button class="btn btn-danger">
+                <button class="btn btn-danger" (click)="borrarUsuario(usuario)">
                   <i class="fa fa-trash-o"></i>
                 </button>
               </td>
@@ -59,13 +78,12 @@
           </tbody>
         </table>
 
-        <button class="btn btn-secondary">
+        <button class="btn btn-secondary" (click)="cambiarDesde(-5)">
           Anteriores
         </button>
-        <button class="btn btn-secondary">
+        <button class="btn btn-secondary" (click)="cambiarDesde(5)">
           Siguientes
         </button>
-
       </div>
     </div>
   </div>

@@ -48,7 +48,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Fotograf&iacute;a del usuario</h4>
-        <h6 class="card-subtitle">Nombre usuario</h6>
+        <h6 class="card-subtitle">{{ usuario.nombre }}</h6>
 
         <div class="mb-3 d-flex flex-column align-items-center">
           <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" class="w150" />
