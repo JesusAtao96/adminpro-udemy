@@ -1,0 +1,91 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          #input
+          type="text"
+          class="form-control"
+          placeholder="Buscar médico..."
+          (keyup)="buscarMedico(input.value)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+  <div class="col-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando</strong>
+      <br />
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+      <br />
+      <span>Espere por favor</span>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between mb-3">
+          <h3 class="card-title m-0">
+            Médicos registrados ( <small>{{ totalRegistros }}</small> )
+          </h3>
+
+          <button class="btn btn-primary btn-sm btn-rounded pl-4 pr-4" [routerLink]="['/medico', 'nuevo']">
+            <i class="fa fa-plus mr-2"></i> Crear Médico
+          </button>
+        </div>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Foto</th>
+              <th>Médico</th>
+              <th>Hospital</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let medico of medicos">
+              <td class="w70 text-center v-middle">
+                <img
+                  [src]="medico.img | imagen: 'medico'"
+                  class="img-50 img-circle pointer"
+                  (click)="mostrarModal(medico._id)"
+                />
+              </td>
+              <td class="v-middle">{{ medico.nombre }}</td>
+              <td class="v-middle">{{ medico.hospital.nombre }}</td>
+              <td class="v-middle">
+                <button
+                  class="btn btn-primary mr-2"
+                  [routerLink]="['/medico', medico._id]"
+                >
+                  <i class="fa fa-pencil"></i>
+                </button>
+                <button
+                  class="btn btn-danger"
+                  (click)="borrarMedico(medico)"
+                >
+                  <i class="fa fa-trash-o"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button class="btn btn-secondary" (click)="cambiarDesde(-5)">
+          Anteriores
+        </button>
+        <button class="btn btn-secondary" (click)="cambiarDesde(5)">
+          Siguientes
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>

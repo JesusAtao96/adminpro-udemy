@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
-import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 import { Hospital } from '../../models/hospital.model';
 
 import { map } from 'rxjs/operators';
@@ -24,7 +22,10 @@ export class HospitalService {
 
   obtenerHospital(id: string) {
     const url = `${environment.URL_SERVICIOS}/hospital/${id}`;
-    return this.http.get(url);
+    return this.http.get(url)
+      .pipe(
+        map((resp: any) => resp.hospital)
+      );
   }
 
   borrarHospital(id: string) {
