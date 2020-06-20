@@ -6,8 +6,8 @@
           #input
           type="text"
           class="form-control"
-          placeholder="Buscar usuario..."
-          (keyup)="buscarUsuario(input.value)"
+          placeholder="Buscar hospital..."
+          (keyup)="buscarHospital(input.value)"
         />
       </div>
     </div>
@@ -30,47 +30,52 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h3 class="card-title">
-          Usuario registrados ( <small>{{ totalRegistros }}</small> )
-        </h3>
+        <div class="d-flex justify-content-between mb-3">
+          <h3 class="card-title m-0">
+            Hospitales registrados ( <small>{{ totalRegistros }}</small> )
+          </h3>
+
+          <button class="btn btn-primary btn-sm btn-rounded pl-4 pr-4" (click)="crearHospital()">
+            <i class="fa fa-plus mr-2"></i> Crear hospital
+          </button>
+        </div>
 
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>Imagen</th>
-              <th>Correo</th>
-              <th>Nombre</th>
-              <th>Role</th>
-              <th>Auth</th>
+              <th>Foto</th>
+              <th>Hospital</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let usuario of usuarios">
+            <tr *ngFor="let hospital of hospitales">
               <td class="w70 text-center v-middle">
-                <img [src]="usuario.img | imagen" class="img-50 img-circle pointer" (click)="mostrarModal(usuario._id)">
-              </td>
-              <td class="v-middle">{{ usuario.email }}</td>
-              <td class="v-middle">{{ usuario.nombre }}</td>
-              <td class="v-middle">
-                <select name="role" class="form-control v-middl" [(ngModel)]="usuario.role">
-                  <option value="ADMIN_ROLE">ADMIN_ROLE</option>
-                  <option value="USER_ROLE">USER_ROLE</option>
-                </select>
+                <img
+                  [src]="hospital.img | imagen: 'hospital'"
+                  class="img-50 img-circle pointer"
+                  (click)="mostrarModal(hospital._id)"
+                />
               </td>
               <td class="v-middle">
-                <label *ngIf="usuario.google" class="label label-danger m-0"
-                  >Google</label
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="hospital.nombre"
+                  required
+                />
+              </td>
+              <td class="v-middle">
+                <button
+                  class="btn btn-primary mr-2"
+                  (click)="actualizarHospital(hospital)"
                 >
-                <label *ngIf="!usuario.google" class="label label-primary m-0"
-                  >Normal</label
-                >
-              </td>
-              <td class="v-middle">
-                <button class="btn btn-primary mr-2" (click)="guardarUsuario(usuario)">
                   <i class="fa fa-save"></i>
                 </button>
-                <button class="btn btn-danger" (click)="borrarUsuario(usuario)">
+                <button
+                  class="btn btn-danger"
+                  (click)="borrarHospital(hospital)"
+                >
                   <i class="fa fa-trash-o"></i>
                 </button>
               </td>
