@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,9 +7,9 @@ import { Medico } from './../../models/medico.model';
 
 import { HospitalService, MedicoService } from '../../services';
 
-import { ModalUploadService } from './../../components/modal-upload/modal-upload.service';
+import { Subscription } from 'rxjs';
 
-import Swal from 'sweetalert2';
+import { ModalUploadService } from './../../components/modal-upload/modal-upload.service';
 
 @Component({
   selector: 'app-medico',
@@ -17,10 +17,12 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class MedicoComponent implements OnInit {
+export class MedicoComponent implements OnInit, OnDestroy {
   hospitales: Hospital[] = [];
   medico: Medico = new Medico('', '', null, null, '');
   hospital: Hospital = new Hospital('');
+
+  modalSubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -42,9 +44,13 @@ export class MedicoComponent implements OnInit {
       }
     });
 
-    this.modalUploadService.notificacion.subscribe((resp: any) => {
+    this.modalSubscription = this.modalUploadService.notificacion.subscribe((resp: any) => {
       this.medico.img = resp.medico.img;
     });
+  }
+
+  ngOnDestroy() {
+    this.modalSubscription.unsubscribe();
   }
 
   cargarMedico(id: string) {

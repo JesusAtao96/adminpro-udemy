@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Hospital } from '../../models/hospital.model';
 import { HospitalService } from '../../services';
 import { ModalUploadService } from './../../components/modal-upload/modal-upload.service';
 
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hospitales',
@@ -11,18 +12,24 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class HospitalesComponent implements OnInit {
+export class HospitalesComponent implements OnInit, OnDestroy {
   hospitales: Hospital[] = [];
   desde = 0;
 
   totalRegistros = 0;
   cargando = true;
 
+  modalSubscription: Subscription;
+
   constructor(private hospitalService: HospitalService, private modalUploadService: ModalUploadService) { }
 
   ngOnInit() {
     this.cargarHospitales();
-    this.modalUploadService.notificacion.subscribe(() => this.cargarHospitales());
+    this.modalSubscription = this.modalUploadService.notificacion.subscribe(() => this.cargarHospitales());
+  }
+
+  ngOnDestroy() {
+    this.modalSubscription.unsubscribe();
   }
 
   cargarHospitales() {

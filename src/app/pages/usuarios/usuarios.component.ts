@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services';
 import { ModalUploadService } from './../../components/modal-upload/modal-upload.service';
 
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-usuarios',
@@ -11,18 +12,24 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class UsuariosComponent implements OnInit {
+export class UsuariosComponent implements OnInit, OnDestroy {
   usuarios: Usuario[] = [];
   desde = 0;
 
   totalRegistros = 0;
   cargando = true;
 
+  modalSubscription: Subscription;
+
   constructor(private usuarioService: UsuarioService, private modalUploadService: ModalUploadService) { }
 
   ngOnInit() {
     this.cargarUsuarios();
-    this.modalUploadService.notificacion.subscribe(resp => this.cargarUsuarios());
+    this.modalSubscription = this.modalUploadService.notificacion.subscribe(resp => this.cargarUsuarios());
+  }
+
+  ngOnDestroy() {
+    this.modalSubscription.unsubscribe();
   }
 
   cargarUsuarios() {
