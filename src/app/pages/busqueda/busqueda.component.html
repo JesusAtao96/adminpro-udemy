@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Usuarios</h4>
+
+        <table class="table table-hover">
+          <tbody>
+            <tr class="pointer" *ngFor="let usuario of usuarios" [routerLink]="['/usuarios']">
+              <td class="v-middle"><img [src]="usuario.img | imagen:'usuario'" class="img-50 img-circle"></td>
+              <td class="v-middle">{{ usuario.nombre }}</td>
+            </tr>
+            <tr class="text-center" *ngIf="usuarios.length === 0">
+              <td colspan="2">No hay usuarios con el término de búsqueda</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Médicos</h4>
+
+        <table class="table table-hover">
+          <tbody>
+            <tr class="pointer" *ngFor="let medico of medicos" [routerLink]="['/medico', medico._id]">
+              <td class="v-middle"><img [src]="medico.img | imagen:'medico'" class="img-50 img-circle"></td>
+              <td class="v-middle">{{ medico.nombre }}</td>
+            </tr>
+            <tr class="text-center" *ngIf="medicos.length === 0">
+              <td colspan="2">No hay médicos con el término de búsqueda</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Hospitales</h4>
+
+        <table class="table table-hover">
+          <tbody>
+            <tr class="pointer" *ngFor="let hospital of hospitales" [routerLink]="['/hospitales']">
+              <td class="v-middle"><img [src]="hospital.img | imagen:'hospital'" class="img-50 img-circle"></td>
+              <td class="v-middle">{{ hospital.nombre }}</td>
+            </tr>
+            <tr class="text-center" *ngIf="hospitales.length === 0">
+              <td colspan="2">No hay hospitales con el término de búsqueda</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

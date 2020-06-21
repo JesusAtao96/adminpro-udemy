@@ -76,14 +76,16 @@
             href="javascript:void(0)"
             ><i class="ti-search"></i
           ></a>
-          <form class="app-search">
+          <div class="app-search" >
             <input
+              #input
               type="text"
               class="form-control"
-              placeholder="Search & enter"
+              placeholder="Buscar y enter"
+              (keyup.enter)="buscar(input.value)"
             />
             <a class="srh-btn"><i class="ti-close"></i></a>
-          </form>
+          </div>
         </li>
         <!-- ============================================================== -->
         <!-- Messages -->
