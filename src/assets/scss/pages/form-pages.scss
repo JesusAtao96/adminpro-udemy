@@ -12,7 +12,7 @@ Custom-select
 ******************/
 
 .custom-select {
-    background: url(../../assets/images/custom-select.png) right .75rem center no-repeat;
+    background: url(assets/images/custom-select.png) right .75rem center no-repeat;
 }
 
 
@@ -157,7 +157,7 @@ Form summernote
 }
 
 
-/*============================================================== 
+/*==============================================================
 Form addons page
 ============================================================== */
 
@@ -215,17 +215,17 @@ Form addons page
         .select2-selection__choice{
             background: $themecolor;
             color:$white;
-            border-color:$themecolor;    
+            border-color:$themecolor;
         }
     }
-}    
+}
 
 .input-form .btn {
   padding: 8px 12px;
 }
 
 
-/*============================================================== 
+/*==============================================================
 Form Material page
  ============================================================== */
 
@@ -278,7 +278,7 @@ Form Material page
 
 
 /*******************
-Form validation error 
+Form validation error
 ******************/
 
 .error .help-block {
@@ -287,7 +287,7 @@ Form validation error
 
 
 /*******************
-File Upload 
+File Upload
 ******************/
 
 .fileupload {
@@ -306,7 +306,7 @@ File Upload
     }
 }
 /*******************
-This is for the checkbox radio button and switch 
+This is for the checkbox radio button and switch
 ******************/
 $btn-box-shadow:0 3px 4px 1px rgba(0,0,0,.1);
 $btn-box-shadow-hover:0 1px 4px 0 rgba(0,0,0,.2);
@@ -407,7 +407,7 @@ $colors: ( red: #fb3a3a, pink: #E91E63, purple: #7460ee, deep-purple: #673AB7, i
 /* Focused styles */
 [type="radio"].tabbed:focus + label:before {
   box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
- animation: ripple 0.2s linear forwards;    
+ animation: ripple 0.2s linear forwards;
 }
 
 /* Disabled Radio With gap */
@@ -426,7 +426,7 @@ $colors: ( red: #fb3a3a, pink: #E91E63, purple: #7460ee, deep-purple: #673AB7, i
 [type="radio"]:disabled:checked + label:before {
   background-color: transparent;
   border-color: rgba(0, 0, 0, 0.26);
- animation: ripple 0.2s linear forwards;    
+ animation: ripple 0.2s linear forwards;
 }
 
 [type="radio"]:disabled + label {
@@ -732,7 +732,7 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 
 
 
-.scale-up{ 
+.scale-up{
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     -webkit-transform: scale(0);
@@ -740,7 +740,7 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     display:inline-block;
     transform-origin: right 0px;
 }
-.scale-up-left{ 
+.scale-up-left{
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     -webkit-transform: scale(0);
@@ -758,8 +758,8 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 }
 /*panels*/
 .card{
-   box-shadow:$box-shadow; 
-   border-radius:$radius;  
+   box-shadow:$box-shadow;
+   border-radius:$radius;
 }
 
 .well, pre{
@@ -812,7 +812,7 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
         padding-left: 26px;
         height: 25px;
         line-height: 21px;
-        
+
         font-weight: normal;
     }
 
@@ -823,7 +823,7 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
                 left: -2px;
                 width: 11px;
                 height: 19px;
-                
+
             }
         }
     }
@@ -865,7 +865,7 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
                 &:after {
                     border: 2px solid $val;
                     background-color: $val;
-                    
+
                 }
             }
         }
@@ -878,7 +878,7 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
             padding-left: 26px;
             height: 25px;
             line-height: 25px;
-            
+
             font-weight: normal;
         }
     }
@@ -888,9 +888,9 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
             padding-left: 26px;
             height: 25px;
             line-height: 25px;
-            
+
             font-weight: normal;
-            
+
         }
     }
 }

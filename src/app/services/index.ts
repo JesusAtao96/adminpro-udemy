@@ -1,5 +1,6 @@
 export * from './guards/admin.guard';
 export * from './guards/login-guard.guard';
+export * from './guards/verifica-token.guard';
 export * from './settings/settings.service';
 export * from './subir-archivo/subir-archivo.service';
 export * from './usuario/usuario.service';

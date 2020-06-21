@@ -8,9 +8,8 @@ import { UsuarioService } from '../usuario/usuario.service';
 })
 export class AdminGuard implements CanActivate {
 
-  constructor(public router: Router, private usuarioService: UsuarioService) {
+  constructor(public router: Router, private usuarioService: UsuarioService) {}
 
-  }
   canActivate() {
     if (this.usuarioService.usuario.role === 'ADMIN_ROLE') {
       return true;
