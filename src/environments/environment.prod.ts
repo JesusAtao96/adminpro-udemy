@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  URL_SERVICIOS: 'http://localhost:3000'
+  URL_SERVICIOS: 'https://hospital-pro.herokuapp.com'
 };
